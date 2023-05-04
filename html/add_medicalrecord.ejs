@@ -1,0 +1,158 @@
+<%- include('header') %>
+
+         
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              
+
+              <!-- Basic Layout -->
+              <div class="row">
+                <div class="col-xl">
+                  <div class="card mb-4">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">add medicalrecord</h5>
+                      <small class="text-muted float-end">Default label</small>
+                    </div>
+                    <div class="card-body">
+                      <form method="post" action="/medicalrecord/add_medicalrecorddata">
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-fullname">hospital name</label>
+                          <select name="hospitalid" id="hospitalid" onchange="getdoctor()">
+                            <option value="">-- select hospital --</option>
+                            <% for(var hos of hospital ){%>
+                              <option value="<%= hos.id %>"><%= hos.hname %></option>
+                          <% } %>
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-fullname">doctor name</label>
+                          <select name="doctorid" id="doctorid" onchange="getpatient()" >
+                          
+                            
+                        </select>
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-fullname">patient name</label>
+                          <select name="patientid" id="patientid" >
+                          
+                            
+                        </select>
+                        </div>
+                       
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-company">patient problem</label>
+                          <input type="text" name="mrproblem" class="form-control" id="basic-default-company" placeholder="enter patient problem here" />
+                        </div>
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-default-company">date of examination</label>
+                          <input type="date" name="mrdate" class="form-control" id="basic-default-company" />
+                        </div>
+                        
+                        
+                        <button type="submit" class="btn btn-primary">Send</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+               
+              </div>
+            </div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with ❤️ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
+                </div>
+                <div>
+                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+                  <a
+                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Documentation</a
+                  >
+
+                  <a
+                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Support</a
+                  >
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <div class="buy-now">
+      <a
+        href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
+        target="_blank"
+        class="btn btn-danger btn-buy-now"
+        >Upgrade to Pro</a
+      >
+    </div>
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <%- include('footer')%>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script>
+        function  getdoctor(){
+            var hospitalid =  document.getElementById('hospitalid').value;        
+                 
+            $.ajax({
+                url : '/patient/doctordata',
+                type : "post",
+                data : {
+                    'hospitalid' : hospitalid
+                },
+                success : function(res){
+                    $('#doctorid').html(res)
+                }
+            })
+           
+        }
+        function  getpatient(){
+            var doctorid =  document.getElementById('doctorid').value;        
+                 console.log("patient")
+            $.ajax({
+                url : '/medicalrecord/patientdata',
+                type : "post",
+                data : {
+                    'doctorid' : doctorid
+                },
+                success : function(res){
+                    $('#patientid').html(res)
+                }
+            })
+           
+        }
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+  </body>
+</html>

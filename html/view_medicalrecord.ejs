@@ -1,0 +1,50 @@
+<%- include('header')%>
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              
+
+              <!-- Basic Bootstrap Table -->
+              <div class="card">
+                <h5 class="card-header">Table Basic</h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>no</th>
+                        <th>hospital name</th>
+                        <th>doctor name</th>
+                        <th>patient name</th>
+                        <th>date of examination</th>
+                        <th>patient problem</th>                   
+                        <th>delete</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <% var no = '1'; for(var mr of mrdata) {%>                    
+                        <tr>
+                          <th scope="row"><%= no ++ %></th>
+                          <td><%= mr.hospitalid.hname %></td>
+                          <td><%= mr.doctorid.name %></td>
+                          <td><%= mr.patientid.pname%></td>                                              
+                          <td><%= mr.mrdate%></td>                                              
+                          <td><%= mr.mrproblem%></td>                                              
+                          <td><a href="/medicalrecord/deletedata/<%=mr.id%>">delete</a></td>                
+                         
+                        </tr>
+                        <% } %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--/ Basic Bootstrap Table -->
+
+              
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <%- include('footer')%>
+  </body>
+</html>
