@@ -5,9 +5,9 @@ const port = 9099;
 const app = express();
 
 const path = require('path');
+const mongoose = require('mongoose')
 
-// const db = require('./config/moongose');
-mongoose.connect("mongodb+srv://pranavad76:pranav@69896@crmproject.vkaho7b.mongodb.net/test" , {
+mongoose.connect("mongodb+srv://pranav:pranav69896@crmproject.hwifsty.mongodb.net/test" , {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
